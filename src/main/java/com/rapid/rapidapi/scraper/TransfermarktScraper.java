@@ -29,7 +29,7 @@ public class TransfermarktScraper {
             Elements rows = (Elements) doc.select("div.jucator.col-6.col-lg-3");
             for(Element row : rows){
                 String name = row.select("h2.nume-jucator").text();
-                String imageURL = row.select("img").attr("src");
+                String imageURL = row.select("img").attr("data-src");
                 players.add(new PlayerProfile(name,imageURL));
             }
         }
