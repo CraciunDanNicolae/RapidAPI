@@ -22,25 +22,15 @@ public class TransfermarktScraper {
     public List<PlayerProfile> scraperPlayers(){
         List<PlayerProfile> players = new ArrayList<PlayerProfile>();
         try{
-            Document doc = Jsoup.connect("https://www.transfermarkt.ro/fc-rapid-1923/startseite/verein/455")
+            Document doc = Jsoup.connect("https://www.fcrapid.ro/prima-echipa/")
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
                     .get();
 
-            Elements rows = (Elements) doc.select("tbody tr.odd, tbody tr.even");
-            Elements images = (Elements) rows.select("td[rowspan=2] img");
-            int index = 0;
+            Elements rows = (Elements) doc.select("div.jucator.col-6.col-lg-3");
             for(Element row : rows){
-                String name = row.select("td.hauptlink a").first().text();
-                String position = row.select("td[class*=rueckennummer]").attr("title");
-                Integer number = Integer.parseInt(row.select("td.zentriert").first().text());
-                String date = row.select("td.zentriert").get(1).text();
-                LocalDate date_of_birth = LocalDate.parse(date.split("\\(")[0].trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-                String ageText = date.split("\\(")[1].replace(")", "").trim();
-                Integer age = Integer.parseInt(ageText);
-                String nationality = row.select("img.flaggenrahmen").attr("title");
-                String imageURL = images.get(index).attr("data-src");
-                players.add(new PlayerProfile(name, position, age, nationality, date_of_birth, number,imageURL));
-                index = index +1;
+                String name = row.select("h2.nume-jucator").text();
+                String imageURL = row.select("img").attr("src");
+                players.add(new PlayerProfile(name,imageURL));
             }
         }
         catch(IOException e){
