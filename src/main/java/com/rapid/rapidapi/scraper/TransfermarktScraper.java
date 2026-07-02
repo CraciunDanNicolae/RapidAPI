@@ -68,6 +68,7 @@ public class TransfermarktScraper {
             match.setTeam2(team2);
             match.setTeam2URL(team2URL);
             match.setDate(matchDate);
+            break;
         }
 
             return match;
