@@ -58,8 +58,8 @@ public class TransfermarktScraper {
             for(Element row : rows){
             String team1 = row.select("div.meci-details-center div.echipa1-text").text();
             String team2 = row.select("div.meci-details-center div.echipa2-text").text();
-            String team1URL = row.select("div.meci-details-center div.echipa1-logo img").attr("src");
-            String team2URL = row.select("div.meci-details-center div.echipa2-logo img").attr("src");
+            String team1URL = row.select("div.meci-details-center div.echipa1-logo img").attr("abs:src");
+            String team2URL = row.select("div.meci-details-center div.echipa2-logo img").attr("abs:src");
             String date = row.select("div.meci-details-top div.meci-date").text();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("ro"));
             LocalDate matchDate = LocalDate.parse(date, formatter);
