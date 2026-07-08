@@ -64,6 +64,7 @@ public class TransfermarktScraper {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("ro"));
             LocalDate matchDate = LocalDate.parse(date, formatter);
             match.setTeam1(team1);
+            if(team1.equals("RAP")) match.setHome(true);
             match.setTeam1URL(team1URL);
             match.setTeam2(team2);
             match.setTeam2URL(team2URL);
